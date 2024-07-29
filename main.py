@@ -10,6 +10,22 @@ MIN_BET =1
 ROWS = 3
 COLS =3 #columns same as reels in slot machine
 
+symbol_count = { #This is a dictonary in python 
+    "A": 2,
+    "B": 4,
+    "C": 6,
+    "D": 8,
+
+}
+
+def get_slot_machine_spin(rows, cols, symbols):
+    all_symbols =[] #This is a lsit
+    #for loop to ilterate the dictionary
+
+    for symbol, symbol_count in symbols.items():
+        for _ in range(symbol):
+            all_symbols.append(symbol) 
+
 # defining function to accept players deposit.
 def deposit():
 
