@@ -10,7 +10,7 @@ MIN_BET =1
 ROWS = 3
 COLS =3 #columns same as reels in slot machine
 
-symbol_count = { #This is a dictonary in python 
+symbol_count = { #This is a dictonary in python  
     "A": 2,
     "B": 4,
     "C": 6,
@@ -25,6 +25,23 @@ def get_slot_machine_spin(rows, cols, symbols):
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol):
             all_symbols.append(symbol) 
+    
+    columns = []
+
+    for _ in range(cols):
+        column = []
+
+        current_symbols = all_symbols[:] #making a copy of all_symbols  using the slice operator in other to make it more flexible
+
+        for _ in range(rows):
+            value = random.choice(current_symbols)
+            current_symbols.remove(value)
+            column.append(value)
+
+        columns.append(column) 
+    
+    return columns
+     
 
 # defining function to accept players deposit.
 def deposit():
