@@ -1,7 +1,14 @@
+import random
+
 # CONSTANTS DEFINITION using capital  letters for my variable which is a conventional way for declaring python constants
 MAX_LINES =3 
 MAX_BET = 100
 MIN_BET =1
+
+
+# NUMBERS OF ROWS AND COLUMNS FOR SLOT MACHINE
+ROWS = 3
+COLS =3 #columns same as reels in slot machine
 
 # defining function to accept players deposit.
 def deposit():
@@ -56,17 +63,20 @@ def main():
 
     lines = get_number_of_lines()
 
-    bet = get_bet()
+    
 
-    total_bet = bet * lines
+  
 
     while True:
-        if total_bet < balance:
-            break
-        else:
-            print(f"You don't have sufficient balance to bet on that amount, your total balance is ${balance}.")
+        bet = get_bet()
 
-    
+        total_bet = bet * lines
+
+        if total_bet > balance:
+            print(f"You don't have sufficient balance to bet on that amount, your total balance is ${balance}.")
+        else:
+            break
+ 
 
     print(f"You are betting ${bet} on ${lines} lines, total bet is equal to ${total_bet} ")
     
