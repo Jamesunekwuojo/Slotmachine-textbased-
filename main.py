@@ -18,6 +18,20 @@ symbol_count = { #This is a dictonary in python
 
 }
 
+
+symbol_value ={
+    "A": 5,
+    "B": 4,
+    "C": 6,
+    "D": 8,
+
+}
+
+
+def check_winnings(columns, lines, bet, values):
+    
+
+
 def get_slot_machine_spin(rows, cols, symbols):
     all_symbols =[] #This is a lsit
     #for loop to ilterate the dictionary
@@ -102,6 +116,9 @@ def get_bet():
         else:
             print("Please enter a number.")
     return amount
+
+
+
 
 def main():
 
