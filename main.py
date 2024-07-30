@@ -22,14 +22,28 @@ symbol_count = { #This is a dictonary in python
 symbol_value ={
     "A": 5,
     "B": 4,
-    "C": 6,
-    "D": 8,
+    "C": 3,
+    "D": 2 
 
 }
 
 
 def check_winnings(columns, lines, bet, values):
+    winnnings =0
+    winnning_lines =[]
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbol_to_check = column[line]
+            if symbol != symbol_to_check:
+                break
+        else:
+            winnnings += values[symbol] * bet
+            winnning_lines.append(line + 1)
     
+    return winnnings, winnning_lines
+
+     
 
 
 def get_slot_machine_spin(rows, cols, symbols):
@@ -44,7 +58,7 @@ def get_slot_machine_spin(rows, cols, symbols):
 
     for _ in range(cols):
         column = []
-
+ 
         current_symbols = all_symbols[:] #making a copy of all_symbols  using the slice operator in other to make it more flexible
 
         for _ in range(rows):
@@ -118,18 +132,12 @@ def get_bet():
     return amount
 
 
-
-
-def main():
-
-    balance = deposit()
+def spin(balance):
+    
 
     lines = get_number_of_lines()
 
-    
-
   
-
     while True:
         bet = get_bet()
 
@@ -141,16 +149,41 @@ def main():
             break
  
 
-    print(f"You are betting ${bet} on ${lines} lines, total bet is equal to ${total_bet} ")
+    print(f"You are betting ${bet} on {lines} lines, total bet is equal to ${total_bet} ")
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
 
     print_slot_machine(slots)
+
+    winnnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
+
+    print(f"You won ${winnnings}. ")
+    print(f"You won on lines:", *winning_lines)
+
+    return winnnings - total_bet
+    
+
+
+
+def main():
+
+    balance = deposit()
+
+    while True:
+        print(f"Current balcance is ${balance}")
+        answer = input("Press enter to spin (q to quit).")
+
+        if answer == "q":
+            break
+        balance += spin(balance)
+    
+    print(f"You are left with ${balance}")
+
+
+
     
 
   
-
-   
 
 main()
     
