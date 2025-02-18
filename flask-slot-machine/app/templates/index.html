@@ -1,44 +1,77 @@
 <!-- index.html for Slot Machine Flask App -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Slot Machine Game</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .slot { display: flex; justify-content: center; font-size: 24px; }
-        .reel { margin: 0 10px; padding: 20px; border: 2px solid #333; border-radius: 5px; }
-        .result { font-weight: bold; margin-top: 20px; }
-        button { padding: 10px 20px; font-size: 16px; }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .slot {
+        display: flex;
+        justify-content: center;
+        font-size: 24px;
+      }
+      .reel {
+        margin: 0 10px;
+        padding: 20px;
+        border: 2px solid #333;
+        border-radius: 5px;
+      }
+      .result {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Slot Machine Game</h1>
     <p>Balance: ${{ balance }}</p>
     <form method="POST">
-        <label>Lines to Bet (1-3):</label>
-        <input type="number" name="lines" min="1" max="3" value="{{ lines }}" required>
-        <label>Bet per Line ($1-$100):</label>
-        <input type="number" name="bet" min="1" max="100" value="{{ bet }}" required>
-        <button type="submit">Spin</button>
+      <label>Lines to Bet (1-3):</label>
+      <input
+        type="number"
+        name="lines"
+        min="1"
+        max="3"
+        value="{{ lines }}"
+        required
+      />
+      <label>Bet per Line ($1-$100):</label>
+      <input
+        type="number"
+        name="bet"
+        min="1"
+        max="100"
+        value="{{ bet }}"
+        required
+      />
+      <button type="submit">Spin</button>
     </form>
     {% if slots %}
-        <div class="slot">
-            {% for row in range(3) %}
-                <div class="reel">
-                    {% for column in slots %}
-                        <span>{{ column[row] }}</span>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="result">
-            <p>Winnings: ${{ winnings }}</p>
-            {% if winning_lines %}
-                <p>Winning Lines: {{ winning_lines | join(', ') }}</p>
-            {% else %}
-                <p>No Winning Lines</p>
-            {% endif %}
-        </div>
+    <div class="slot">
+      {% for row in range(3) %}
+      <div class="reel">
+        {% for column in slots %}
+        <span>{{ column[row] }}</span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="result">
+      <p>Winnings: ${{ winnings }}</p>
+      {% if winning_lines %}
+      <p>Winning Lines: {{ winning_lines | join(', ') }}</p>
+      {% else %}
+      <p>No Winning Lines</p>
+      {% endif %}
+    </div>
     {% endif %}
-</body>
+  </body>
 </html>
